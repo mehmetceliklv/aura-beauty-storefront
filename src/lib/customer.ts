@@ -162,12 +162,16 @@ export async function customerFetch<T>(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      // Shopify Customer Account API accepts the token directly (no Bearer prefix)
       Authorization: accessToken,
     },
     body: JSON.stringify({ query, variables }),
   })
 
-  if (!res.ok) throw new Error(`Customer API error: ${res.status}`)
+  if (!res.ok) {
+    const text = await res.text().catch(() => '')
+    throw new Error(`Customer API ${res.status}: ${text.slice(0, 200)}`)
+  }
   const json = await res.json()
   if (json.errors) throw new Error(json.errors[0]?.message ?? 'Customer API error')
   return json.data as T

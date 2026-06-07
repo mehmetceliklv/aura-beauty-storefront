@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
   const error = searchParams.get('error')
 
   if (error) {
-    return NextResponse.redirect(`${BASE_URL}/account/login?error=${error}`)
+    return NextResponse.redirect(`${BASE_URL}/account/login?error=${encodeURIComponent(error)}`)
   }
 
   if (!code || !state) {
@@ -35,53 +35,85 @@ export async function GET(request: NextRequest) {
   // Validate state (CSRF protection)
   const savedState = request.cookies.get('oauth_state')?.value
   if (!savedState || savedState !== state) {
+    console.error('[auth/callback] state mismatch', { savedState, state })
     return NextResponse.redirect(`${BASE_URL}/account/login?error=state_mismatch`)
   }
 
   const codeVerifier = request.cookies.get('oauth_code_verifier')?.value
   if (!codeVerifier) {
+    console.error('[auth/callback] missing code_verifier cookie')
     return NextResponse.redirect(`${BASE_URL}/account/login?error=missing_verifier`)
   }
 
+  // Step 1: Exchange code for tokens
+  let tokens: Awaited<ReturnType<typeof exchangeCodeForToken>>
   try {
-    // Exchange code for tokens
-    const tokens = await exchangeCodeForToken(code, codeVerifier)
+    tokens = await exchangeCodeForToken(code, codeVerifier)
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err)
+    console.error('[auth/callback] token exchange failed:', msg)
+    return NextResponse.redirect(
+      `${BASE_URL}/account/login?error=${encodeURIComponent('token_' + msg.slice(0, 60))}`
+    )
+  }
 
-    // Fetch customer profile
-    const { customer } = await customerFetch<CustomerQueryResult>(
+  // Step 2: Fetch customer profile using access token
+  let customer: CustomerQueryResult['customer']
+  try {
+    const result = await customerFetch<CustomerQueryResult>(
       tokens.access_token,
       CUSTOMER_QUERY
     )
-
-    const session: CustomerSession = {
+    customer = result.customer
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err)
+    console.error('[auth/callback] customer fetch failed:', msg)
+    // Token is valid but profile fetch failed — still create a minimal session
+    // so the user isn't stuck in a login loop
+    const minimalSession: CustomerSession = {
       accessToken: tokens.access_token,
       refreshToken: tokens.refresh_token,
-      expiresAt: Date.now() + tokens.expires_in * 1000,
-      customerId: customer.id,
-      email: customer.emailAddress.emailAddress,
-      firstName: customer.firstName ?? undefined,
-      lastName: customer.lastName ?? undefined,
+      expiresAt: Date.now() + (tokens.expires_in ?? 3600) * 1000,
+      customerId: 'unknown',
+      email: 'unknown',
     }
-
     const response = NextResponse.redirect(`${BASE_URL}/account`)
-
-    // Store session as JSON cookie (httpOnly)
-    response.cookies.set(SESSION_COOKIE, JSON.stringify(session), {
+    response.cookies.set(SESSION_COOKIE, JSON.stringify(minimalSession), {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
-      maxAge: tokens.expires_in,
+      maxAge: tokens.expires_in ?? 3600,
     })
-
-    // Clear PKCE cookies
     response.cookies.delete('oauth_state')
     response.cookies.delete('oauth_nonce')
     response.cookies.delete('oauth_code_verifier')
-
     return response
-  } catch (err) {
-    console.error('[auth/callback]', err)
-    return NextResponse.redirect(`${BASE_URL}/account/login?error=auth_failed`)
   }
+
+  const session: CustomerSession = {
+    accessToken: tokens.access_token,
+    refreshToken: tokens.refresh_token,
+    expiresAt: Date.now() + (tokens.expires_in ?? 3600) * 1000,
+    customerId: customer.id,
+    email: customer.emailAddress?.emailAddress ?? 'unknown',
+    firstName: customer.firstName ?? undefined,
+    lastName: customer.lastName ?? undefined,
+  }
+
+  const response = NextResponse.redirect(`${BASE_URL}/account`)
+
+  response.cookies.set(SESSION_COOKIE, JSON.stringify(session), {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/',
+    maxAge: tokens.expires_in ?? 3600,
+  })
+
+  response.cookies.delete('oauth_state')
+  response.cookies.delete('oauth_nonce')
+  response.cookies.delete('oauth_code_verifier')
+
+  return response
 }
