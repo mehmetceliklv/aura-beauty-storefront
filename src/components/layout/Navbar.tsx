@@ -220,8 +220,8 @@ const NAV_ITEMS: NavItem[] = [
 
 function MegaPanel({ columns, onClose }: { columns: MegaColumn[]; onClose: () => void }) {
   return (
-    <div className="absolute top-full left-0 right-0 z-50 bg-white shadow-lg border-t-2 border-aura-rose-gold">
-      <div className="max-w-4xl mx-auto grid grid-cols-3 gap-8 p-8">
+    <div className="absolute top-full left-0 right-0 z-50 bg-white shadow-xl border-t-2 border-aura-rose-gold">
+      <div className="max-w-7xl mx-auto grid grid-cols-3 gap-10 px-8 py-8">
         {columns.map((col) => (
           <div key={col.heading}>
             <p className="text-[10px] tracking-[0.15em] uppercase font-semibold text-aura-charcoal border-b border-aura-border-soft pb-2 mb-3">
@@ -297,7 +297,7 @@ export default function Navbar() {
             return (
               <li
                 key={item.label}
-                className="relative"
+                className={hasMega ? '' : 'relative'}
                 onMouseEnter={() => handleMouseEnter(item.label)}
                 onMouseLeave={handleMouseLeave}
               >
