@@ -83,8 +83,9 @@ export async function buildAuthorizationUrl(
     client_id: clientId,
     response_type: 'code',
     redirect_uri: redirectUri,
-    // Scopes: identity + granular Customer Account API permissions
-    scope: 'openid email customer_read_customers customer_write_customers customer_read_orders customer_read_markets',
+    // Shopify Customer Account API only accepts openid + email in the OAuth scope.
+    // The API permissions (read orders, addresses etc.) are configured in Shopify Admin.
+    scope: 'openid email',
     state,
     nonce,
     code_challenge: codeChallenge,
