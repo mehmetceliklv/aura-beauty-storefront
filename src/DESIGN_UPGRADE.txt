@@ -1,0 +1,135 @@
+AURA BEAUTY — Luxury Design Upgrade
+=====================================
+
+Date: 2026-06-07
+Summary: Full visual redesign from functional e-commerce to luxury "million dollar" cosmetics aesthetic.
+
+FILES CHANGED
+-------------
+
+1. tailwind.config.ts
+   - Replaced old color palette (red/navy/beige) with luxury palette:
+     cream #FAFAF7, charcoal #1C1C1C, rose-gold #C4A882, blush #F5E6DF,
+     stone #8C7B6B, border-soft #EDE8E3, dark #111111, dark-footer #0F0F0F
+   - Added Cormorant Garamond as display/serif font
+   - Added DM Sans as body font
+   - Legacy color aliases kept for backward compatibility
+
+2. src/app/globals.css
+   - Added Google Fonts import (Cormorant Garamond + DM Sans)
+   - New CSS variables --font-display and --font-body
+   - Body background changed from white to #FAFAF7 (cream)
+   - h1/h2/h3 now use Cormorant Garamond with letter-spacing
+   - .aura-logo updated: Cormorant Garamond, tracking-[0.3em], thin rose-gold underline
+   - .nav-item updated: 12px, tracking-[0.12em], rose-gold active/hover states
+   - .btn-primary/.btn-secondary updated: charcoal base, rose-gold hover
+   - product-grid gap increased to 24px
+   - Custom scrollbar (rose-gold thumb)
+   - Custom text selection (blush background)
+
+3. src/components/layout/AnnouncementBar.tsx
+   - Complete rewrite: deep black #0F0F0F background
+   - Center: free shipping + samples message, very fine tracking
+   - Left: hours (desktop only)
+   - Right: EN | UA language toggle (desktop only)
+   - Removed phone numbers
+
+4. src/components/layout/Header.tsx
+   - Sticky header with frosted glass (bg-aura-cream/95 backdrop-blur-sm)
+   - Scroll-aware: compact on scroll (useEffect + scrollY > 50)
+   - Logo: Cormorant Garamond via .aura-logo class with rose-gold underline
+   - Icons: strokeWidth 1.5 (more delicate), hover rose-gold
+   - Cart badge: rose-gold background (was red)
+   - Removed wishlist icon from header (cleaner)
+   - Search close icon when open
+   - Search input: focus border rose-gold, submit button charcoal/rose-gold hover
+
+5. src/components/layout/Navbar.tsx
+   - Nav items separated by centered dots "·"
+   - Labels simplified: FACE/HAIR/BODY/HOME (was FACE CARE, etc.)
+   - All accents rose-gold (was red)
+   - font-size 12px, tracking-[0.12em]
+   - SALE first item (no longer red-only)
+
+6. src/components/product/ProductCard.tsx
+   - Removed card border and bg-white wrapper
+   - Aspect ratio changed to 3:4 (portrait/editorial)
+   - Image hover: scale-105 over 700ms ease-out
+   - "Quick Add" overlay slides up from bottom on hover
+   - Vendor name above product title (stone color, 10px uppercase)
+   - Product title in Cormorant Garamond (font-display), font-light
+   - Price layout: compare-at before current price
+   - Badges: minimal pill style (no circle badge for sale)
+   - Removed AddToCartButton from default card view
+
+7. src/components/ui/Badge.tsx
+   - NEW: charcoal bg, 9px text, tracking-[0.1em]
+   - BESTSELLER: outline style (border + stone text)
+   - SALE: rose-gold bg (was red circle)
+   - All badges: pill shape (no border-radius circle)
+
+8. src/components/ui/PromoBanner.tsx
+   - Full rewrite: blush background, centered editorial layout
+   - Serif heading "The Gift of Beautiful Skin"
+   - Outline CTA button (charcoal border, hover fill)
+   - Removed decorative SVG gift box
+
+9. src/components/layout/Footer.tsx
+   - Background #0F0F0F (deeper black)
+   - Top section: AURA BEAUTY logo in Cormorant, tagline
+   - Gradient rose-gold divider line
+   - Columns renamed: SHOP | BRANDS | HELP | CONNECT
+   - Contact moved to CONNECT column (removed from announcement bar)
+   - All link text: font-light, text-white/50 base, white on hover
+   - Social icons: text-white/40, strokeWidth 1.5
+   - Bottom copyright: text-white/25
+
+10. src/components/ui/HeroBanner.tsx
+    - Full-screen (min-h-screen) cream background (was dark navy)
+    - Left-aligned editorial layout
+    - Rose-gold eyebrow text "New Arrivals"
+    - Cormorant Garamond H1 with italic "Honours" — fluid font-size (clamp)
+    - Two CTAs: filled charcoal + outline charcoal (was red + white outline)
+    - Subtle blush radial gradient background decoration
+    - Rose-gold glow on right side (desktop)
+
+11. src/components/ui/CategoryGrid.tsx
+    - Blush (#F5E6DF) card backgrounds (was white with border)
+    - hover:bg-aura-blush-dark
+    - Cormorant Garamond category titles
+    - Right-aligned "View All →" link
+    - Removed emoji icons
+    - More generous padding (p-8)
+
+12. src/app/page.tsx
+    - Added "Our Promise" strip (Clinically Tested / Cruelty Free / Clean Ingredients)
+    - Featured Products & Bestsellers sections: luxury headings + "View All →"
+    - Bestsellers section: blush background
+    - New "Skin Diagnostics CTA" section with quiz prompt
+    - PromoBanner added at the end
+
+13. src/app/collections/[handle]/page.tsx
+    - Page title: Cormorant 5xl, font-light (was 3xl font-serif)
+    - Results count moved above CollectionView (stone color)
+    - More generous top padding (py-16)
+
+14. src/components/product/CollectionView.tsx
+    - Gap increased from gap-8 to gap-12
+    - Removed inline results count (now on page level)
+
+15. src/components/filters/FilterSidebar.tsx
+    - Removed gray background (#F7F7F7 → no bg)
+    - Filter labels: 10px, tracking-[0.15em], stone color on chevron
+    - Reset button: stone/uppercase styling (was red)
+    - Border color: aura-border-soft #EDE8E3 (was #E5E5E5)
+    - Chevron: strokeWidth 1.5, smoother transition
+
+DESIGN PRINCIPLES APPLIED
+--------------------------
+- White/cream space is luxury: all sections use py-20 or py-24
+- Serif headings everywhere: Cormorant Garamond font-light
+- Rose gold (#C4A882) replaces all red accents
+- Smooth transitions: duration-300 ease-out on all hovers
+- Subtle shadows only: shadow-sm, never shadow-lg
+- Cards float without borders: product grid uses gap, not card outlines
+- Typography hierarchy: 10px uppercase stone captions → 14px font-display product names → 48px display headings

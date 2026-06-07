@@ -1,0 +1,120 @@
+AURA BEAUTY — Next.js Headless Shopify Storefront
+Build Summary
+==========================================
+
+HOW TO RUN
+----------
+  npm install
+  npm run dev       # http://localhost:3000
+  npm run build     # production build
+  npm run lint      # linting
+
+ENVIRONMENT VARIABLES (create .env.local in project root)
+-----------------------------------------------------------
+  NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN=your-store.myshopify.com
+  NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN=your_storefront_access_token
+
+  To get the Storefront Access Token:
+  1. Open your Shopify Admin
+  2. Go to Settings > Apps and sales channels > Develop apps
+  3. Create a new app (or open existing)
+  4. Under "API credentials" > Storefront API access scopes, enable:
+       unauthenticated_read_product_listings
+       unauthenticated_read_product_inventory
+       unauthenticated_read_product_tags
+       unauthenticated_read_collection_listings
+       unauthenticated_write_checkouts
+       unauthenticated_read_checkouts
+  5. Copy the Storefront API access token
+
+  The app gracefully degrades (empty grids, placeholder UI) when
+  Shopify is not configured.
+
+PAGES
+-----
+  /                           Homepage — hero banner, category grid, featured products, bestsellers
+  /sale                       Sale items (products with compareAtPrice > price)
+  /bestsellers                Best-selling products
+  /brands                     All brands A-Z, linked to collection filters
+  /collections/[handle]       Category pages with price/brand/volume/country filters
+  /products/[handle]          Product detail page with gallery, price, add-to-cart
+  /search?q=query             Search results page
+  /cart                       Cart page (basic — enhance with CartItem/CartDrawer for full UX)
+
+FILES CREATED
+-------------
+  src/app/layout.tsx
+  src/app/globals.css
+  src/app/page.tsx
+  src/app/sale/page.tsx
+  src/app/bestsellers/page.tsx
+  src/app/brands/page.tsx
+  src/app/cart/page.tsx
+  src/app/search/page.tsx
+  src/app/collections/[handle]/page.tsx
+  src/app/products/[handle]/page.tsx
+
+  src/components/layout/AnnouncementBar.tsx  — top bar with phone numbers, social links
+  src/components/layout/Header.tsx           — logo, search, account, wishlist, cart icons
+  src/components/layout/Navbar.tsx           — SALES / BESTSELLERS / BRANDS / FACE CARE / HAIR CARE / BODY CARE / HOME PRODUCTS
+  src/components/layout/Footer.tsx           — 4-column dark footer with social icons
+
+  src/components/product/ProductCard.tsx     — image, NEW/BESTSELLER/SALE% badges, price, add-to-cart
+  src/components/product/ProductGrid.tsx     — responsive 2/3/4-column grid
+  src/components/product/CollectionView.tsx  — client wrapper for collection pages with live filtering
+
+  src/components/filters/FilterSidebar.tsx   — collapsible price/brand/volume/country sidebar
+  src/components/filters/PriceRangeFilter.tsx
+  src/components/filters/BrandFilter.tsx
+  src/components/filters/VolumeFilter.tsx
+  src/components/filters/CountryFilter.tsx
+
+  src/components/cart/AddToCartButton.tsx    — add-to-cart with loading/added state
+  src/components/cart/CartItem.tsx           — cart line item with quantity controls (ready to wire)
+  src/components/cart/CartDrawer.tsx         — slide-in cart drawer (ready to wire)
+  src/components/cart/CartSummary.tsx        — cart totals + checkout CTA (ready to wire)
+
+  src/components/ui/HeroBanner.tsx           — homepage hero
+  src/components/ui/CategoryGrid.tsx         — 4-category shop-by grid
+  src/components/ui/Badge.tsx               — NEW / BESTSELLER / Sale% badges
+  src/components/ui/PriceDisplay.tsx        — price with optional strikethrough
+  src/components/ui/Button.tsx              — reusable button
+  src/components/ui/Breadcrumbs.tsx         — breadcrumb trail
+  src/components/ui/Pagination.tsx          — numbered pagination
+  src/components/ui/SortDropdown.tsx        — sort by dropdown
+  src/components/ui/PromoBanner.tsx         — gift certificate banner
+
+  src/hooks/useCart.ts                      — cart state management hook (Storefront API)
+
+  src/lib/shopify.ts                        — Storefront API fetch client
+  src/lib/types.ts                          — TypeScript interfaces
+  src/lib/utils.ts                          — badge logic, price formatting, filter builders
+  src/lib/queries/products.ts               — product GraphQL queries
+  src/lib/queries/collections.ts            — collection GraphQL queries
+  src/lib/queries/shop.ts                   — shop info + brands queries
+
+  tailwind.config.ts                        — AURA BEAUTY design tokens
+  next.config.js                            — Shopify CDN image domains
+  tsconfig.json                             — TypeScript config with @/* path alias
+  package.json                              — Next.js 14, React 18, TypeScript, Tailwind
+
+DESIGN TOKENS
+-------------
+  Navy:   #1B1F3B   (header, badges, buttons, footer text)
+  Red:    #C8102E   (SALES nav, sale badges, accents)
+  Beige:  #C9B99A   (BESTSELLER badge, footer headings)
+  Gray:   #F7F7F7   (page backgrounds, image placeholders)
+  Border: #E5E5E5
+
+SHOPIFY COLLECTIONS TO CREATE
+------------------------------
+  face-care, hair-care, body-care, home-products, new-arrivals
+  Product tags for badges: "new", "bestseller"
+  Products with compareAtPrice set will show sale percentage automatically.
+
+NEXT STEPS FOR FULL CART FUNCTIONALITY
+---------------------------------------
+  1. Add a CartContext (CartProvider) wrapping the app
+  2. Wire AddToCartButton to call useCart().addToCart()
+  3. Integrate CartDrawer into Header's cart icon onClick
+  4. Wire CartItem/CartSummary into cart/page.tsx and CartDrawer

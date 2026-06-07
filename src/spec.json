@@ -1,0 +1,662 @@
+{
+  "project": {
+    "name": "AURA BEAUTY",
+    "description": "Custom headless Shopify storefront — Next.js 14 App Router",
+    "techStack": {
+      "framework": "Next.js 14 (App Router)",
+      "language": "TypeScript",
+      "styling": "Tailwind CSS",
+      "shopify": {
+        "library": "@shopify/hydrogen-react",
+        "apiVersion": "2024-10",
+        "endpoint": "https://{SHOPIFY_STORE_DOMAIN}/api/2024-10/graphql.json",
+        "headers": {
+          "Content-Type": "application/json",
+          "X-Shopify-Storefront-Access-Token": "{NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN}"
+        }
+      },
+      "envVars": [
+        "NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN",
+        "NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN",
+        "SHOPIFY_ADMIN_API_TOKEN"
+      ]
+    }
+  },
+
+  "designTokens": {
+    "colors": {
+      "background": "#FFFFFF",
+      "textPrimary": "#000000",
+      "redAccent": "#C8102E",
+      "darkNavy": "#1B1F3B",
+      "beige": "#C9B99A",
+      "lightGrayBg": "#F7F7F7",
+      "border": "#E5E5E5",
+      "announcementBg": "#111111",
+      "footerBg": "#1A1A1A",
+      "promoBannerBg": "#F9E4E4"
+    },
+    "typography": {
+      "fontStack": "'Inter', 'Helvetica Neue', Arial, sans-serif",
+      "navItems": { "size": "13px", "transform": "uppercase", "letterSpacing": "0.05em" },
+      "productName": { "size": "14px", "weight": "400" },
+      "price": { "size": "16px", "weight": "700" },
+      "h1PageTitle": { "size": "32px", "weight": "700" },
+      "categoryTag": { "size": "11px", "transform": "uppercase", "color": "#888888" }
+    },
+    "layout": {
+      "sidebarWidth": "240px",
+      "productCardPadding": "80px",
+      "gridColumns": 4
+    }
+  },
+
+  "fileStructure": {
+    "root": "/Users/nigor/shopify store",
+    "tree": {
+      "src": {
+        "app": {
+          "layout.tsx": "Root layout with AnnouncementBar, Header, Navbar, Footer",
+          "page.tsx": "Homepage — hero, featured collections, bestsellers slider",
+          "globals.css": "Tailwind base + custom CSS variables",
+          "collections": {
+            "[handle]": {
+              "page.tsx": "Collection/category page with sidebar filters + product grid"
+            }
+          },
+          "products": {
+            "[handle]": {
+              "page.tsx": "Product detail page"
+            }
+          },
+          "brands": {
+            "page.tsx": "Brands alphabetical listing page"
+          },
+          "sale": {
+            "page.tsx": "Sale page — collection page variant with sale filter pre-applied"
+          },
+          "bestsellers": {
+            "page.tsx": "Bestsellers page — collection page variant"
+          },
+          "cart": {
+            "page.tsx": "Cart page"
+          },
+          "search": {
+            "page.tsx": "Search results page"
+          },
+          "api": {
+            "cart": {
+              "route.ts": "Cart API route handler"
+            }
+          }
+        },
+        "components": {
+          "layout": {
+            "AnnouncementBar.tsx": "Top strip — phone + social links",
+            "Header.tsx": "Middle header — catalog, logo, search, icons",
+            "Navbar.tsx": "Navigation bar — category links with active red border",
+            "Footer.tsx": "4-column dark footer"
+          },
+          "ui": {
+            "Badge.tsx": "NEW / BESTSELLER / Sale% overlay badges",
+            "Breadcrumbs.tsx": "Home > Category trail",
+            "Button.tsx": "Reusable button — outline and filled variants",
+            "PriceDisplay.tsx": "Current price + struck-through original if on sale",
+            "Pagination.tsx": "Numbered pagination component",
+            "SortDropdown.tsx": "Sort by dropdown menu",
+            "Slider.tsx": "Price range slider",
+            "Checkbox.tsx": "Filter checkbox item",
+            "HorizontalScrollSlider.tsx": "5-card horizontal product slider"
+          },
+          "product": {
+            "ProductCard.tsx": "Product card with image, badges, name, price, CTA",
+            "ProductGrid.tsx": "4-column responsive grid of ProductCards",
+            "ProductGallery.tsx": "PDP image gallery",
+            "ProductInfo.tsx": "PDP title, price, variants, add-to-cart section",
+            "AddToCartButton.tsx": "Hydrogen-react cart add button"
+          },
+          "filters": {
+            "FilterSidebar.tsx": "240px sidebar — price, brand, volume, country filters",
+            "PriceRangeFilter.tsx": "Min/max price slider",
+            "BrandFilter.tsx": "Scrollable brand checkbox list",
+            "VolumeFilter.tsx": "Volume option checkboxes",
+            "CountryFilter.tsx": "Country of origin checkboxes"
+          },
+          "sections": {
+            "PromoBanner.tsx": "Pink gift certificate promo banner",
+            "PopularProductsSlider.tsx": "Bottom-of-page 5-card slider",
+            "BrandsAlphabetical.tsx": "Brands list grouped by letter",
+            "HeroBanner.tsx": "Homepage hero"
+          },
+          "cart": {
+            "CartDrawer.tsx": "Slide-in cart drawer",
+            "CartItem.tsx": "Single cart line item",
+            "CartSummary.tsx": "Subtotal + checkout CTA"
+          }
+        },
+        "lib": {
+          "shopify.ts": "Storefront API client — fetch wrapper with auth headers",
+          "queries.ts": "All GraphQL query strings",
+          "fragments.ts": "Reusable GraphQL fragments",
+          "types.ts": "TypeScript interfaces for Shopify data shapes",
+          "utils.ts": "Price formatting, handle slugify, badge logic helpers"
+        },
+        "hooks": {
+          "useCart.ts": "Cart state via hydrogen-react CartProvider",
+          "useFilters.ts": "URL-param driven filter state",
+          "useSearch.ts": "Predictive search hook"
+        },
+        "context": {
+          "CartContext.tsx": "CartProvider wrapper",
+          "WishlistContext.tsx": "Client-side wishlist state"
+        }
+      },
+      "public": {
+        "logo.svg": "AURA BEAUTY logo SVG with red underline flourish",
+        "icons": "Social + UI icon assets"
+      },
+      "tailwind.config.ts": "Tailwind config with design token extensions",
+      "next.config.ts": "Next.js config — image domains for Shopify CDN",
+      "tsconfig.json": "TypeScript config",
+      "package.json": "Dependencies"
+    }
+  },
+
+  "routes": [
+    { "path": "/", "component": "app/page.tsx", "description": "Homepage" },
+    { "path": "/collections/[handle]", "component": "app/collections/[handle]/page.tsx", "description": "Category/collection page with filters" },
+    { "path": "/products/[handle]", "component": "app/products/[handle]/page.tsx", "description": "Product detail page" },
+    { "path": "/brands", "component": "app/brands/page.tsx", "description": "Brands A-Z page" },
+    { "path": "/sale", "component": "app/sale/page.tsx", "description": "Sale items — collection page with sale tag filter" },
+    { "path": "/bestsellers", "component": "app/bestsellers/page.tsx", "description": "Bestsellers — collection with bestseller tag filter" },
+    { "path": "/cart", "component": "app/cart/page.tsx", "description": "Cart page" },
+    { "path": "/search", "component": "app/search/page.tsx", "description": "Search results" }
+  ],
+
+  "components": {
+    "AnnouncementBar": {
+      "file": "src/components/layout/AnnouncementBar.tsx",
+      "props": {},
+      "description": "Full-width strip, bg #111, white text. Phone numbers centered. Social icon links right-aligned (Instagram, Facebook, Viber, WhatsApp, Telegram, TikTok).",
+      "staticContent": true
+    },
+    "Header": {
+      "file": "src/components/layout/Header.tsx",
+      "props": {},
+      "description": "Three-column header. Left: hamburger catalog menu button. Center: AURA BEAUTY text logo with red SVG underline flourish. Right: search bar input + account icon + wishlist heart icon (badge count) + cart bag icon (badge count).",
+      "children": ["CartDrawer", "SearchBar"]
+    },
+    "Navbar": {
+      "file": "src/components/layout/Navbar.tsx",
+      "props": {},
+      "description": "White bg horizontal nav. Links: SALES, BESTSELLERS, BRANDS, FACE CARE, HAIR CARE, BODY CARE, HOME PRODUCTS. Active link has red left border indicator. 13px uppercase letter-spacing."
+    },
+    "Footer": {
+      "file": "src/components/layout/Footer.tsx",
+      "props": {},
+      "description": "Dark #1A1A1A bg. 4 columns: 1) Contact — phone, address, hours. 2) Categories list. 3) Brands list. 4) Info links + social icons row. White text throughout."
+    },
+    "ProductCard": {
+      "file": "src/components/product/ProductCard.tsx",
+      "props": {
+        "product": "ShopifyProduct",
+        "priority": "boolean (for LCP images)"
+      },
+      "description": "White bg card, 80px padding, hover shadow. Square image area (object-fit: contain). Badge overlays top-left. Category tag 11px gray. Product name 14px 2-line clamp. PriceDisplay component. Full-width ADD TO CART button (outline hover fill).",
+      "subComponents": ["Badge", "PriceDisplay", "AddToCartButton"]
+    },
+    "ProductGrid": {
+      "file": "src/components/product/ProductGrid.tsx",
+      "props": {
+        "products": "ShopifyProduct[]",
+        "loading": "boolean"
+      },
+      "description": "CSS grid 4 columns (responsive: 2 on tablet, 1 on mobile). Maps products to ProductCard."
+    },
+    "Badge": {
+      "file": "src/components/ui/Badge.tsx",
+      "props": {
+        "type": "'new' | 'bestseller' | 'sale'",
+        "salePercent": "number (optional)"
+      },
+      "description": "NEW: dark navy #1B1F3B pill. BESTSELLER: beige #C9B99A pill with 'BEAUTY BOX' sub-label. Sale: red #C8102E circle with percent value."
+    },
+    "PriceDisplay": {
+      "file": "src/components/ui/PriceDisplay.tsx",
+      "props": {
+        "price": "string",
+        "compareAtPrice": "string | null",
+        "currencyCode": "string"
+      },
+      "description": "Shows price 16px bold. If compareAtPrice exists and is higher, shows original price struck-through in gray, sale price in red."
+    },
+    "FilterSidebar": {
+      "file": "src/components/filters/FilterSidebar.tsx",
+      "props": {
+        "maxPrice": "number",
+        "brands": "string[]",
+        "activeFilters": "FilterState"
+      },
+      "description": "240px fixed sidebar, #F7F7F7 bg. Contains PriceRangeFilter, BrandFilter, VolumeFilter, CountryFilter. Each section has collapsible header."
+    },
+    "PriceRangeFilter": {
+      "file": "src/components/filters/PriceRangeFilter.tsx",
+      "props": {
+        "min": "number",
+        "max": "number",
+        "value": "[number, number]",
+        "onChange": "(range: [number, number]) => void"
+      }
+    },
+    "BrandFilter": {
+      "file": "src/components/filters/BrandFilter.tsx",
+      "props": {
+        "brands": "string[]",
+        "selected": "string[]",
+        "onChange": "(brands: string[]) => void"
+      },
+      "description": "Scrollable list (max-height 200px overflow-y auto) with checkboxes."
+    },
+    "VolumeFilter": {
+      "file": "src/components/filters/VolumeFilter.tsx",
+      "props": {
+        "options": "string[]",
+        "selected": "string[]",
+        "onChange": "(volumes: string[]) => void"
+      },
+      "description": "Options: 30ml, 50ml, 100ml, 200ml, 300ml+"
+    },
+    "CountryFilter": {
+      "file": "src/components/filters/CountryFilter.tsx",
+      "props": {
+        "options": "string[]",
+        "selected": "string[]",
+        "onChange": "(countries: string[]) => void"
+      },
+      "description": "Options: USA, France, Korea, Japan, Israel, Ukraine, Germany, Italy, UK"
+    },
+    "Pagination": {
+      "file": "src/components/ui/Pagination.tsx",
+      "props": {
+        "currentPage": "number",
+        "totalPages": "number",
+        "onPageChange": "(page: number) => void"
+      },
+      "description": "Numbered pagination. Shows up to 7 page numbers with ellipsis. Prev/Next arrows."
+    },
+    "SortDropdown": {
+      "file": "src/components/ui/SortDropdown.tsx",
+      "props": {
+        "value": "SortKey",
+        "onChange": "(key: SortKey) => void"
+      },
+      "description": "Options: Featured, Price Low to High, Price High to Low, Newest, Best Selling"
+    },
+    "Breadcrumbs": {
+      "file": "src/components/ui/Breadcrumbs.tsx",
+      "props": {
+        "items": "{ label: string; href?: string }[]"
+      }
+    },
+    "BrandsAlphabetical": {
+      "file": "src/components/sections/BrandsAlphabetical.tsx",
+      "props": {
+        "brands": "Brand[]"
+      },
+      "description": "Groups brands by first character (0-9, A-Z). Each section has letter heading. Featured brands show red checkmark. Expandable about text at bottom."
+    },
+    "PromoBanner": {
+      "file": "src/components/sections/PromoBanner.tsx",
+      "props": {},
+      "description": "Full-width pink/salmon #F9E4E4 bg banner. Gift certificate advertisement. Static content."
+    },
+    "PopularProductsSlider": {
+      "file": "src/components/sections/PopularProductsSlider.tsx",
+      "props": {
+        "products": "ShopifyProduct[]"
+      },
+      "description": "Horizontal scrollable 5-card product slider. Section title 'Popular Products'. Prev/next arrows."
+    },
+    "CartDrawer": {
+      "file": "src/components/cart/CartDrawer.tsx",
+      "props": {
+        "isOpen": "boolean",
+        "onClose": "() => void"
+      },
+      "description": "Slide-in from right. Uses hydrogen-react useCart. Lists CartItem components. Shows CartSummary at bottom."
+    },
+    "CartItem": {
+      "file": "src/components/cart/CartItem.tsx",
+      "props": {
+        "line": "CartLine"
+      }
+    },
+    "CartSummary": {
+      "file": "src/components/cart/CartSummary.tsx",
+      "props": {
+        "cost": "CartCost"
+      },
+      "description": "Subtotal display + Checkout button linking to Shopify checkout URL."
+    },
+    "AddToCartButton": {
+      "file": "src/components/product/AddToCartButton.tsx",
+      "props": {
+        "variantId": "string",
+        "quantity": "number",
+        "className": "string (optional)"
+      },
+      "description": "Uses hydrogen-react useCart.linesAdd. White bg black border outline, hover: black bg white text."
+    }
+  },
+
+  "graphqlQueries": {
+    "GET_PRODUCTS_BY_COLLECTION": {
+      "file": "src/lib/queries.ts",
+      "description": "Fetch products for a collection with cursor-based pagination, sort key, and filters",
+      "variables": {
+        "handle": "String!",
+        "first": "Int! (default 24)",
+        "after": "String (cursor)",
+        "sortKey": "ProductCollectionSortKeys",
+        "reverse": "Boolean",
+        "filters": "[ProductFilter!]"
+      },
+      "query": "query GetProductsByCollection($handle: String!, $first: Int!, $after: String, $sortKey: ProductCollectionSortKeys, $reverse: Boolean, $filters: [ProductFilter!]) {\n  collection(handle: $handle) {\n    id\n    title\n    description\n    seo { title description }\n    products(\n      first: $first\n      after: $after\n      sortKey: $sortKey\n      reverse: $reverse\n      filters: $filters\n    ) {\n      pageInfo {\n        hasNextPage\n        hasPreviousPage\n        startCursor\n        endCursor\n      }\n      filters {\n        id\n        label\n        type\n        values { id label count input }\n      }\n      edges {\n        cursor\n        node {\n          id\n          title\n          handle\n          tags\n          vendor\n          productType\n          priceRange {\n            minVariantPrice { amount currencyCode }\n            maxVariantPrice { amount currencyCode }\n          }\n          compareAtPriceRange {\n            minVariantPrice { amount currencyCode }\n          }\n          featuredImage { url altText width height }\n          images(first: 2) {\n            edges { node { url altText width height } }\n          }\n          variants(first: 1) {\n            edges {\n              node {\n                id\n                title\n                availableForSale\n                price { amount currencyCode }\n                compareAtPrice { amount currencyCode }\n                selectedOptions { name value }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+    },
+    "GET_PRODUCT_BY_HANDLE": {
+      "file": "src/lib/queries.ts",
+      "description": "Full product detail for PDP",
+      "variables": {
+        "handle": "String!"
+      },
+      "query": "query GetProductByHandle($handle: String!) {\n  product(handle: $handle) {\n    id\n    title\n    handle\n    description\n    descriptionHtml\n    vendor\n    productType\n    tags\n    seo { title description }\n    priceRange {\n      minVariantPrice { amount currencyCode }\n      maxVariantPrice { amount currencyCode }\n    }\n    compareAtPriceRange {\n      minVariantPrice { amount currencyCode }\n    }\n    images(first: 10) {\n      edges { node { id url altText width height } }\n    }\n    options {\n      id\n      name\n      values\n    }\n    variants(first: 100) {\n      edges {\n        node {\n          id\n          title\n          availableForSale\n          quantityAvailable\n          price { amount currencyCode }\n          compareAtPrice { amount currencyCode }\n          selectedOptions { name value }\n          image { url altText }\n        }\n      }\n    }\n    metafields(identifiers: [\n      { namespace: \"custom\", key: \"country_of_origin\" },\n      { namespace: \"custom\", key: \"volume\" }\n    ]) {\n      key\n      value\n    }\n  }\n}"
+    },
+    "GET_ALL_COLLECTIONS": {
+      "file": "src/lib/queries.ts",
+      "description": "Fetch all collections for navbar and footer",
+      "variables": {
+        "first": "Int! (default 50)"
+      },
+      "query": "query GetAllCollections($first: Int!) {\n  collections(first: $first) {\n    edges {\n      node {\n        id\n        title\n        handle\n        image { url altText }\n        seo { title description }\n      }\n    }\n  }\n}"
+    },
+    "GET_ALL_VENDORS": {
+      "file": "src/lib/queries.ts",
+      "description": "Fetch all unique product vendors for brands page and brand filter",
+      "variables": {
+        "first": "Int! (default 250)"
+      },
+      "query": "query GetAllVendors($first: Int!) {\n  products(first: $first) {\n    edges {\n      node {\n        vendor\n      }\n    }\n  }\n}",
+      "note": "Deduplicate vendor strings client-side and sort alphabetically. For brand metaobjects, use Admin API or metaobjects query."
+    },
+    "SEARCH_PRODUCTS": {
+      "file": "src/lib/queries.ts",
+      "description": "Predictive search and full search results",
+      "variables": {
+        "query": "String!",
+        "first": "Int! (default 20)",
+        "after": "String"
+      },
+      "query": "query SearchProducts($query: String!, $first: Int!, $after: String) {\n  search(query: $query, first: $first, after: $after, types: [PRODUCT]) {\n    pageInfo { hasNextPage endCursor }\n    edges {\n      node {\n        ... on Product {\n          id\n          title\n          handle\n          vendor\n          featuredImage { url altText width height }\n          priceRange {\n            minVariantPrice { amount currencyCode }\n          }\n          compareAtPriceRange {\n            minVariantPrice { amount currencyCode }\n          }\n          tags\n        }\n      }\n    }\n  }\n}"
+    },
+    "PREDICTIVE_SEARCH": {
+      "file": "src/lib/queries.ts",
+      "description": "Live search suggestions as user types",
+      "variables": {
+        "query": "String!"
+      },
+      "query": "query PredictiveSearch($query: String!) {\n  predictiveSearch(query: $query, types: [PRODUCT, COLLECTION]) {\n    products {\n      id\n      title\n      handle\n      featuredImage { url altText width height }\n      priceRange {\n        minVariantPrice { amount currencyCode }\n      }\n    }\n    collections {\n      id\n      title\n      handle\n    }\n  }\n}"
+    },
+    "CREATE_CART": {
+      "file": "src/lib/queries.ts",
+      "description": "Create a new cart",
+      "mutation": "mutation CreateCart($input: CartInput!) {\n  cartCreate(input: $input) {\n    cart {\n      id\n      checkoutUrl\n      totalQuantity\n      cost {\n        subtotalAmount { amount currencyCode }\n        totalAmount { amount currencyCode }\n      }\n      lines(first: 100) {\n        edges {\n          node {\n            id\n            quantity\n            cost {\n              totalAmount { amount currencyCode }\n            }\n            merchandise {\n              ... on ProductVariant {\n                id\n                title\n                price { amount currencyCode }\n                compareAtPrice { amount currencyCode }\n                image { url altText }\n                product { title handle featuredImage { url } }\n              }\n            }\n          }\n        }\n      }\n    }\n    userErrors { field message }\n  }\n}"
+    },
+    "ADD_CART_LINES": {
+      "file": "src/lib/queries.ts",
+      "mutation": "mutation AddCartLines($cartId: ID!, $lines: [CartLineInput!]!) {\n  cartLinesAdd(cartId: $cartId, lines: $lines) {\n    cart { id totalQuantity cost { subtotalAmount { amount currencyCode } } }\n    userErrors { field message }\n  }\n}"
+    },
+    "UPDATE_CART_LINES": {
+      "file": "src/lib/queries.ts",
+      "mutation": "mutation UpdateCartLines($cartId: ID!, $lines: [CartLineUpdateInput!]!) {\n  cartLinesUpdate(cartId: $cartId, lines: $lines) {\n    cart { id totalQuantity cost { subtotalAmount { amount currencyCode } } }\n    userErrors { field message }\n  }\n}"
+    },
+    "REMOVE_CART_LINES": {
+      "file": "src/lib/queries.ts",
+      "mutation": "mutation RemoveCartLines($cartId: ID!, $lineIds: [ID!]!) {\n  cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {\n    cart { id totalQuantity cost { subtotalAmount { amount currencyCode } } }\n    userErrors { field message }\n  }\n}"
+    },
+    "GET_CART": {
+      "file": "src/lib/queries.ts",
+      "query": "query GetCart($cartId: ID!) {\n  cart(id: $cartId) {\n    id\n    checkoutUrl\n    totalQuantity\n    cost {\n      subtotalAmount { amount currencyCode }\n      totalTaxAmount { amount currencyCode }\n      totalAmount { amount currencyCode }\n    }\n    lines(first: 100) {\n      edges {\n        node {\n          id\n          quantity\n          cost { totalAmount { amount currencyCode } }\n          merchandise {\n            ... on ProductVariant {\n              id\n              title\n              price { amount currencyCode }\n              compareAtPrice { amount currencyCode }\n              image { url altText }\n              product {\n                id\n                title\n                handle\n                featuredImage { url altText }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}"
+    }
+  },
+
+  "typeDefinitions": {
+    "file": "src/lib/types.ts",
+    "types": {
+      "ShopifyProduct": {
+        "id": "string",
+        "title": "string",
+        "handle": "string",
+        "description": "string",
+        "descriptionHtml": "string",
+        "vendor": "string",
+        "productType": "string",
+        "tags": "string[]",
+        "priceRange": "{ minVariantPrice: Money; maxVariantPrice: Money }",
+        "compareAtPriceRange": "{ minVariantPrice: Money }",
+        "featuredImage": "ShopifyImage | null",
+        "images": "ShopifyImage[]",
+        "variants": "ShopifyVariant[]"
+      },
+      "ShopifyVariant": {
+        "id": "string",
+        "title": "string",
+        "availableForSale": "boolean",
+        "quantityAvailable": "number",
+        "price": "Money",
+        "compareAtPrice": "Money | null",
+        "selectedOptions": "{ name: string; value: string }[]",
+        "image": "ShopifyImage | null"
+      },
+      "ShopifyImage": {
+        "url": "string",
+        "altText": "string | null",
+        "width": "number",
+        "height": "number"
+      },
+      "Money": {
+        "amount": "string",
+        "currencyCode": "string"
+      },
+      "ShopifyCollection": {
+        "id": "string",
+        "title": "string",
+        "handle": "string",
+        "description": "string",
+        "image": "ShopifyImage | null",
+        "products": "ShopifyProduct[]",
+        "pageInfo": "PageInfo",
+        "filters": "CollectionFilter[]"
+      },
+      "PageInfo": {
+        "hasNextPage": "boolean",
+        "hasPreviousPage": "boolean",
+        "startCursor": "string",
+        "endCursor": "string"
+      },
+      "CollectionFilter": {
+        "id": "string",
+        "label": "string",
+        "type": "string",
+        "values": "{ id: string; label: string; count: number; input: string }[]"
+      },
+      "FilterState": {
+        "priceRange": "[number, number]",
+        "brands": "string[]",
+        "volumes": "string[]",
+        "countries": "string[]",
+        "sortKey": "SortKey"
+      },
+      "SortKey": "'MANUAL' | 'BEST_SELLING' | 'TITLE' | 'PRICE' | 'CREATED'",
+      "Brand": {
+        "name": "string",
+        "handle": "string",
+        "featured": "boolean",
+        "description": "string | null"
+      },
+      "CartLine": {
+        "id": "string",
+        "quantity": "number",
+        "merchandise": "ShopifyVariant & { product: ShopifyProduct }",
+        "cost": "{ totalAmount: Money }"
+      }
+    }
+  },
+
+  "pageSpecs": {
+    "CollectionPage": {
+      "file": "src/app/collections/[handle]/page.tsx",
+      "dataFetching": "Server Component — fetch collection + products via GET_PRODUCTS_BY_COLLECTION",
+      "urlParams": {
+        "handle": "collection handle from URL segment",
+        "page": "query param for pagination",
+        "sort": "query param for sort key",
+        "minPrice": "query param",
+        "maxPrice": "query param",
+        "brands": "query param (comma-separated)",
+        "volumes": "query param (comma-separated)",
+        "countries": "query param (comma-separated)"
+      },
+      "layout": "Breadcrumbs -> H1 title -> [FilterSidebar (240px) | [SortDropdown + ProductGrid + Pagination]] -> PromoBanner -> PopularProductsSlider",
+      "filterMapping": {
+        "price": "ProductFilter: { price: { min: number, max: number } }",
+        "brand": "ProductFilter: { productVendor: string }",
+        "volume": "ProductFilter: { variantOption: { name: 'Volume', value: string } }",
+        "country": "ProductFilter: { productMetafield: { namespace: 'custom', key: 'country_of_origin', value: string } }"
+      }
+    },
+    "SalePage": {
+      "file": "src/app/sale/page.tsx",
+      "description": "Reuses CollectionPage layout. Pre-applies filter: tag = 'sale'. All products show red % badge.",
+      "collectionHandle": "sale"
+    },
+    "BestsellersPage": {
+      "file": "src/app/bestsellers/page.tsx",
+      "description": "Reuses CollectionPage layout. Pre-applies filter: tag = 'bestseller'. All products show BESTSELLER badge.",
+      "collectionHandle": "bestsellers"
+    },
+    "BrandsPage": {
+      "file": "src/app/brands/page.tsx",
+      "dataFetching": "Server Component — fetch all vendors via GET_ALL_VENDORS, deduplicate, sort A-Z",
+      "layout": "Breadcrumbs -> H1 'Brands' -> BrandsAlphabetical -> expandable about section"
+    },
+    "ProductDetailPage": {
+      "file": "src/app/products/[handle]/page.tsx",
+      "dataFetching": "Server Component — GET_PRODUCT_BY_HANDLE",
+      "layout": "Breadcrumbs -> [ProductGallery | ProductInfo] -> Description -> Related Products slider"
+    },
+    "HomePage": {
+      "file": "src/app/page.tsx",
+      "dataFetching": "Server Component — fetch featured collection + bestsellers",
+      "layout": "HeroBanner -> Featured Collections grid -> Bestsellers slider -> Brands logos strip -> PromoBanner"
+    }
+  },
+
+  "tailwindConfig": {
+    "file": "tailwind.config.ts",
+    "extend": {
+      "colors": {
+        "red-accent": "#C8102E",
+        "dark-navy": "#1B1F3B",
+        "beige": "#C9B99A",
+        "light-gray": "#F7F7F7",
+        "border-default": "#E5E5E5",
+        "announcement": "#111111",
+        "footer-bg": "#1A1A1A",
+        "promo-bg": "#F9E4E4"
+      },
+      "fontFamily": {
+        "sans": ["Inter", "Helvetica Neue", "Arial", "sans-serif"]
+      }
+    },
+    "safelist": ["line-clamp-2", "object-contain"]
+  },
+
+  "nextConfig": {
+    "file": "next.config.ts",
+    "images": {
+      "remotePatterns": [
+        { "protocol": "https", "hostname": "cdn.shopify.com" },
+        { "protocol": "https", "hostname": "**.myshopify.com" }
+      ]
+    }
+  },
+
+  "dependencies": {
+    "production": {
+      "next": "14.x",
+      "react": "18.x",
+      "react-dom": "18.x",
+      "typescript": "5.x",
+      "@shopify/hydrogen-react": "2024.x",
+      "tailwindcss": "3.x",
+      "@tailwindcss/line-clamp": "latest",
+      "autoprefixer": "latest",
+      "postcss": "latest"
+    },
+    "dev": {
+      "@types/react": "18.x",
+      "@types/react-dom": "18.x",
+      "@types/node": "20.x",
+      "eslint": "8.x",
+      "eslint-config-next": "14.x"
+    }
+  },
+
+  "shopifyApiDetails": {
+    "endpoint": "https://{NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN}/api/2024-10/graphql.json",
+    "method": "POST",
+    "requiredHeaders": {
+      "Content-Type": "application/json",
+      "X-Shopify-Storefront-Access-Token": "{NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN}"
+    },
+    "clientSetup": {
+      "file": "src/lib/shopify.ts",
+      "pattern": "async function shopifyFetch<T>({ query, variables }: { query: string; variables?: Record<string, unknown> }): Promise<T> — wraps fetch(), throws on non-200, returns data field"
+    }
+  },
+
+  "badgeLogic": {
+    "file": "src/lib/utils.ts",
+    "rules": {
+      "isNew": "product.tags.includes('new')",
+      "isBestseller": "product.tags.includes('bestseller')",
+      "isSale": "product.variants[0].compareAtPrice !== null && parseFloat(product.variants[0].compareAtPrice.amount) > parseFloat(product.variants[0].price.amount)",
+      "salePercent": "Math.round((1 - price / compareAtPrice) * 100)"
+    }
+  },
+
+  "filterUrlStrategy": {
+    "description": "All filters live as URL search params. FilterSidebar reads from searchParams and calls router.push() with updated params. This enables shareable filtered URLs and server-side rendering of filtered results.",
+    "params": {
+      "sort": "BEST_SELLING | PRICE_ASC | PRICE_DESC | NEWEST",
+      "min_price": "number",
+      "max_price": "number",
+      "brand": "comma-separated vendor names (URL encoded)",
+      "volume": "comma-separated volume values",
+      "country": "comma-separated country names",
+      "page": "page number for cursor offset"
+    }
+  },
+
+  "paginationStrategy": {
+    "description": "Shopify Storefront API uses cursor-based pagination. Maintain a page->cursor map in the URL or server state. For page N, store cursors array from previous fetches. Simple approach: use 'after' cursor param directly in URL.",
+    "implementation": "Each page fetch returns endCursor. Store as ?cursor=xxx in URL. Pagination component shows numbered pages by pre-fetching total count or estimating from collection product count metafield."
+  },
+
+  "accessibilityNotes": {
+    "focusRing": "All interactive elements have visible focus ring (outline-2 outline-offset-2)",
+    "altText": "All product images use product title + variant as alt text",
+    "ariaLabels": "Cart button: 'Shopping cart, {n} items'. Wishlist: 'Wishlist'. FilterSidebar sections use role=group with legend.",
+    "skipNav": "Skip to main content link as first focusable element"
+  }
+}
