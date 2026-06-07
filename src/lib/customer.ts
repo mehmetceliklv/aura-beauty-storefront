@@ -19,7 +19,7 @@ const AUTH_BASE = `https://shopify.com/authentication/${SHOP_ID}`
 export const OAUTH_AUTHORIZE_URL = `${AUTH_BASE}/oauth/authorize`
 export const OAUTH_TOKEN_URL = `${AUTH_BASE}/oauth/token`
 export const OAUTH_LOGOUT_URL = `${AUTH_BASE}/logout`
-const CUSTOMER_API = `${AUTH_BASE}/account/customer/api/2024-10/graphql`
+const CUSTOMER_API = `https://shopify.com/authentication/${SHOP_ID}/account/customer/api/2024-10/graphql`
 
 export function getCustomerAccountClientId() {
   return CUSTOMER_ACCOUNT_CLIENT_ID
@@ -83,8 +83,8 @@ export async function buildAuthorizationUrl(
     client_id: clientId,
     response_type: 'code',
     redirect_uri: redirectUri,
-    // Scopes: openid + email for identity, customer-account-api:full for Customer API access
-    scope: 'openid email customer-account-api:full',
+    // Scopes: identity + granular Customer Account API permissions
+    scope: 'openid email customer_read_customers customer_write_customers customer_read_orders customer_read_markets',
     state,
     nonce,
     code_challenge: codeChallenge,
