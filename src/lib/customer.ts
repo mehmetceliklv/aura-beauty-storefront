@@ -83,7 +83,8 @@ export async function buildAuthorizationUrl(
     client_id: clientId,
     response_type: 'code',
     redirect_uri: redirectUri,
-    scope: 'openid email https://api.customers.com/auth/customer.graphql',
+    // Scopes: openid + email for identity, customer-account-api:full for Customer API access
+    scope: 'openid email customer-account-api:full',
     state,
     nonce,
     code_challenge: codeChallenge,
