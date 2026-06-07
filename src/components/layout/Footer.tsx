@@ -77,7 +77,7 @@ export default function Footer() {
 
       {/* Rose-gold divider */}
       <div className="max-w-7xl mx-auto px-6">
-        <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, #C4A882, transparent)' }} />
+        <div style={{ height: '1px', background: 'linear-gradient(to right, transparent, #C44B8A, transparent)' }} />
       </div>
 
       {/* 4-column links */}
@@ -85,7 +85,7 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* SHOP */}
           <div>
-            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C4A882' }}>
+            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C44B8A' }}>
               Shop
             </h3>
             <ul className="space-y-3">
@@ -101,7 +101,7 @@ export default function Footer() {
 
           {/* BRANDS */}
           <div>
-            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C4A882' }}>
+            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C44B8A' }}>
               Brands
             </h3>
             <ul className="space-y-3">
@@ -116,7 +116,7 @@ export default function Footer() {
                 </li>
               ))}
               <li>
-                <Link href="/brands" className="text-[13px] font-light transition-colors duration-300 hover:text-white" style={{ color: '#C4A882' }}>
+                <Link href="/brands" className="text-[13px] font-light transition-colors duration-300 hover:text-white" style={{ color: '#C44B8A' }}>
                   All brands →
                 </Link>
               </li>
@@ -125,7 +125,7 @@ export default function Footer() {
 
           {/* HELP */}
           <div>
-            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C4A882' }}>
+            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C44B8A' }}>
               Help
             </h3>
             <ul className="space-y-3">
@@ -141,7 +141,7 @@ export default function Footer() {
 
           {/* CONNECT */}
           <div>
-            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C4A882' }}>
+            <h3 className="text-[10px] tracking-[0.2em] uppercase font-medium mb-5" style={{ color: '#C44B8A' }}>
               Connect
             </h3>
             <ul className="space-y-3 mb-6">
