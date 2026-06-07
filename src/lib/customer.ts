@@ -183,6 +183,7 @@ export const SESSION_COOKIE = 'aura_customer_session'
 
 export interface CustomerSession {
   accessToken: string
+  idToken?: string       // required for Shopify logout id_token_hint
   refreshToken?: string
   expiresAt: number // unix ms
   customerId: string

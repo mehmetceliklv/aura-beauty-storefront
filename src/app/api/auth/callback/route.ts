@@ -66,6 +66,7 @@ export async function GET(request: NextRequest) {
     )
     session = {
       accessToken: tokens.access_token,
+      idToken: tokens.id_token,
       refreshToken: tokens.refresh_token,
       expiresAt: Date.now() + (tokens.expires_in ?? 3600) * 1000,
       customerId: customer.id,
@@ -78,6 +79,7 @@ export async function GET(request: NextRequest) {
     console.error('[auth/callback] profile fetch failed:', err)
     session = {
       accessToken: tokens.access_token,
+      idToken: tokens.id_token,
       refreshToken: tokens.refresh_token,
       expiresAt: Date.now() + (tokens.expires_in ?? 3600) * 1000,
       customerId: '',
