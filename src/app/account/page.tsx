@@ -36,6 +36,13 @@ export default async function AccountPage() {
         <p className="text-[10px] tracking-[0.2em] uppercase text-aura-stone font-light mb-2">
           My Account
         </p>
+        {/* Avatar */}
+        <div
+          className="w-16 h-16 rounded-full flex items-center justify-center text-white text-xl font-light mb-6"
+          style={{ background: 'linear-gradient(135deg, #C44B8A, #9B2D6E)' }}
+        >
+          {(session.firstName?.[0] || session.email[0]).toUpperCase()}
+        </div>
         <h1 className="font-display text-4xl font-light text-aura-charcoal">
           Welcome, {session.firstName || 'Beauty Lover'}
         </h1>
@@ -97,9 +104,15 @@ export default async function AccountPage() {
       </div>
 
       {/* Profile summary */}
-      <div className="bg-aura-blush p-8 mb-8">
+      <div
+        className="p-8 mb-8"
+        style={{
+          background: 'linear-gradient(135deg, #FCEEF5 0%, #FDF8FB 100%)',
+          border: '1px solid #F0D5E5',
+        }}
+      >
         <h2 className="font-display text-xl font-light text-aura-charcoal mb-4">
-          Account Details
+          Profile
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
@@ -114,6 +127,16 @@ export default async function AccountPage() {
             </p>
             <p className="text-[14px] text-aura-charcoal">{session.email}</p>
           </div>
+          {session.firstName && session.lastName && (
+            <div>
+              <p className="text-[10px] tracking-[0.15em] uppercase text-aura-stone mb-1">
+                Full Name
+              </p>
+              <p className="text-[14px] text-aura-charcoal">
+                {session.firstName} {session.lastName}
+              </p>
+            </div>
+          )}
         </div>
       </div>
 

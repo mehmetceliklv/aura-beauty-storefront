@@ -170,15 +170,21 @@ export async function getSaleProducts(first = 24): Promise<Product[]> {
   `
   const data = await shopifyFetch<{ products: { nodes: Product[] } }>({
     query,
-    variables: { first, query: 'compare_at_price:>0' },
+    variables: { first, query: 'compare_at_price:>0 OR tag:sale' },
   })
-  return data.products.nodes.filter((p) => {
+
+  const saleProducts = data.products.nodes.filter((p) => {
     const compareAt = parseFloat(
       p.compareAtPriceRange?.minVariantPrice?.amount || '0'
     )
     const price = parseFloat(p.priceRange.minVariantPrice.amount)
     return compareAt > price
   })
+
+  if (saleProducts.length > 0) return saleProducts
+
+  // Fallback: return all products if no sale-specific products found
+  return data.products.nodes
 }
 
 export async function getBestsellers(first = 24): Promise<Product[]> {

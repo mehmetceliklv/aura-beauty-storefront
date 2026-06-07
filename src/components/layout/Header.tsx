@@ -4,10 +4,10 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useCartContext } from '@/context/CartContext'
+import { useWishlist } from '@/context/WishlistContext'
 
 interface HeaderProps {
   cartCount?: number
-  wishlistCount?: number
 }
 
 function SearchIcon() {
@@ -24,6 +24,14 @@ function AccountIcon() {
     <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
       <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
       <circle cx="12" cy="7" r="4" />
+    </svg>
+  )
+}
+
+function WishlistIcon() {
+  return (
+    <svg width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
     </svg>
   )
 }
@@ -56,9 +64,10 @@ function CloseIcon() {
   )
 }
 
-export default function Header({ cartCount: cartCountProp = 0, wishlistCount = 0 }: HeaderProps) {
+export default function Header({ cartCount: cartCountProp = 0 }: HeaderProps) {
   const router = useRouter()
   const { totalQuantity, openCart } = useCartContext()
+  const { totalCount: wishlistCount } = useWishlist()
   const cartCount = totalQuantity > 0 ? totalQuantity : cartCountProp
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -146,6 +155,20 @@ export default function Header({ cartCount: cartCountProp = 0, wishlistCount = 0
             aria-label="Account"
           >
             <AccountIcon />
+          </Link>
+
+          {/* Wishlist */}
+          <Link
+            href="/wishlist"
+            className="p-2.5 hover:text-aura-rose-gold transition-all duration-300 ease-out relative"
+            aria-label={`Wishlist, ${wishlistCount} items`}
+          >
+            <WishlistIcon />
+            {wishlistCount > 0 && (
+              <span className="absolute -top-0.5 -right-0.5 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center bg-aura-rose-gold font-medium">
+                {wishlistCount}
+              </span>
+            )}
           </Link>
 
           {/* Cart */}

@@ -15,7 +15,7 @@
 
   body {
     font-family: var(--font-body);
-    background-color: #FAFAF7;
+    background-color: #FDF8FB;
     color: #1C1C1C;
     -webkit-font-smoothing: antialiased;
   }
@@ -59,7 +59,7 @@
     transform: translateX(-50%);
     width: 60%;
     height: 1px;
-    background: #C4A882;
+    background: #C44B8A;
   }
 
   .nav-item {
@@ -77,7 +77,7 @@
 
   .nav-item:hover,
   .nav-item.active {
-    color: #C4A882;
+    color: #C44B8A;
   }
 
   .nav-item.active::after,
@@ -88,11 +88,11 @@
     left: 12px;
     right: 12px;
     height: 2px;
-    background: #C4A882;
+    background: #C44B8A;
   }
 
   .filter-section {
-    border-bottom: 1px solid #EDE8E3;
+    border-bottom: 1px solid #F0D5E5;
     padding-bottom: 16px;
     margin-bottom: 16px;
   }
@@ -129,8 +129,8 @@
   }
 
   .btn-primary:hover {
-    background-color: #C4A882;
-    border-color: #C4A882;
+    background-color: #C44B8A;
+    border-color: #C44B8A;
   }
 
   .btn-secondary {
@@ -161,8 +161,43 @@
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: #FAFAF7; }
-::-webkit-scrollbar-thumb { background: #C4A882; border-radius: 2px; }
+::-webkit-scrollbar-track { background: #FDF8FB; }
+::-webkit-scrollbar-thumb { background: #C44B8A; border-radius: 2px; }
 
 /* Selection */
-::selection { background: #F5E6DF; color: #1C1C1C; }
+::selection { background: #FCEEF5; color: #1C1C1C; }
+
+/* Women-focused design enhancements */
+.gradient-rose {
+  background: linear-gradient(135deg, #FCEEF5 0%, #FDF8FB 50%, #F0D5E5 100%);
+}
+
+.gradient-rose-dark {
+  background: linear-gradient(135deg, #C44B8A 0%, #9B2D6E 100%);
+}
+
+.shimmer-rose {
+  background: linear-gradient(90deg, #FCEEF5 25%, #F7C5D8 50%, #FCEEF5 75%);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.text-gradient-rose {
+  background: linear-gradient(135deg, #C44B8A, #9B2D6E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-hover-rose {
+  transition: all 0.3s ease;
+}
+.card-hover-rose:hover {
+  border-color: #C44B8A;
+  box-shadow: 0 4px 20px rgba(196, 75, 138, 0.12);
+}
