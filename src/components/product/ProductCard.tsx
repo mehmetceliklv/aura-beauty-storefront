@@ -102,13 +102,13 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        {/* Wishlist button */}
+        {/* Wishlist button - always visible on mobile, hover-only on desktop */}
         <button
           onClick={(e) => {
             e.preventDefault()
             toggleWishlist(product.id)
           }}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 hover:scale-110"
           style={{
             background: wishlisted ? '#C44B8A' : 'rgba(255,255,255,0.9)',
             color: wishlisted ? '#fff' : '#C44B8A',
@@ -119,9 +119,9 @@ export default function ProductCard({ product }: ProductCardProps) {
           <HeartIcon filled={wishlisted} />
         </button>
 
-        {/* Quick add */}
+        {/* Quick add - always visible on mobile, hover-only on desktop */}
         <div
-          className="absolute bottom-0 left-0 right-0 py-3 text-center translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out"
+          className="absolute bottom-0 left-0 right-0 py-3 text-center translate-y-0 sm:translate-y-full sm:group-hover:translate-y-0 transition-transform duration-300 ease-out"
           style={{ background: 'rgba(253,248,251,0.96)' }}
         >
           <span className="text-[11px] tracking-[0.15em] uppercase font-medium text-aura-charcoal hover:text-aura-rose-gold transition-colors duration-300">

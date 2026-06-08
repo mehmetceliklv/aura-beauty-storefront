@@ -88,13 +88,13 @@ const categories = [
 
 export default function CategoryGrid() {
   return (
-    <section className="max-w-7xl mx-auto px-6 py-20" aria-label="Shop categories">
-      <div className="flex items-end justify-between mb-12">
+    <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-20" aria-label="Shop categories">
+      <div className="flex items-end justify-between mb-8 sm:mb-12">
         <div>
           <p className="text-[10px] tracking-[0.2em] uppercase text-aura-stone font-light mb-2">
             Explore
           </p>
-          <h2 className="font-display text-4xl font-light text-aura-charcoal">
+          <h2 className="font-display text-2xl sm:text-4xl font-light text-aura-charcoal">
             Shop by Category
           </h2>
         </div>
@@ -114,7 +114,7 @@ export default function CategoryGrid() {
             className="group relative block overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
             style={{ background: gradient }}
           >
-            <div className="p-6 md:p-8">
+            <div className="p-4 sm:p-6 md:p-8">
               {/* Icon */}
               <div
                 className="w-12 h-12 rounded-xl flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110"

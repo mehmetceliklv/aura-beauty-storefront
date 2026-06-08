@@ -183,7 +183,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}>
-        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-[11px] text-white/25 font-light tracking-[0.05em]">
             &copy; {new Date().getFullYear()} AURA BEAUTY. All rights reserved.
           </p>

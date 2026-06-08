@@ -31,10 +31,10 @@ export default function HeroBanner() {
       />
 
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" style={{ minHeight: '90vh' }}>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[60vh] lg:min-h-[90vh]">
 
           {/* Left: Content */}
-          <div className="relative z-10 max-w-xl py-20 lg:py-0">
+          <div className="relative z-10 max-w-xl py-12 sm:py-16 lg:py-0">
             {/* Pill tag */}
             <div className="inline-flex items-center gap-2 bg-white border border-aura-border-soft rounded-full px-4 py-1.5 mb-8 shadow-sm">
               <span
@@ -91,7 +91,7 @@ export default function HeroBanner() {
             </div>
 
             {/* Trust icons */}
-            <div className="flex items-center gap-6 mt-8">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-8">
               {['Cruelty-free', 'Clean ingredients', 'Authentic products'].map((t) => (
                 <div key={t} className="flex items-center gap-1.5">
                   <span className="text-aura-rose-gold text-[10px]">✓</span>

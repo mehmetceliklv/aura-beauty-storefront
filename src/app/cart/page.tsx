@@ -160,10 +160,10 @@ export default function CartPage() {
   const total = cart?.cost.totalAmount
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
       {/* Header */}
-      <div className="flex items-end justify-between mb-10">
-        <h1 className="font-display text-4xl font-light text-aura-charcoal">
+      <div className="flex items-end justify-between mb-8 sm:mb-10">
+        <h1 className="font-display text-2xl sm:text-4xl font-light text-aura-charcoal">
           Shopping Cart
         </h1>
         <p className="text-[12px] text-aura-stone tracking-wider uppercase">

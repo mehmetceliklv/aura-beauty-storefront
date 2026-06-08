@@ -83,7 +83,7 @@ export default async function HomePage() {
 
       {/* Promise strip */}
       <div className="w-full bg-white border-y border-aura-border-soft">
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {PROMISES.map(({ title, desc, icon }) => (
               <div key={title} className="flex items-start gap-4">
@@ -126,13 +126,13 @@ export default async function HomePage() {
       <CategoryGrid />
 
       {/* Shop by Concern */}
-      <section className="w-full border-y border-aura-border-soft py-16" style={{ background: 'linear-gradient(180deg, #FDF8FB 0%, #FCEEF5 100%)' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-10">
+      <section className="w-full border-y border-aura-border-soft py-10 sm:py-16" style={{ background: 'linear-gradient(180deg, #FDF8FB 0%, #FCEEF5 100%)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="text-center mb-8 sm:mb-10">
             <p className="text-[10px] tracking-[0.2em] uppercase text-aura-stone font-light mb-2">Personalised Beauty</p>
-            <h2 className="font-display text-3xl font-light text-aura-charcoal">Shop by Skin Concern</h2>
+            <h2 className="font-display text-2xl sm:text-3xl font-light text-aura-charcoal">Shop by Skin Concern</h2>
           </div>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
             {CONCERNS.map(({ label, icon, href }) => (
               <Link
                 key={label}
@@ -150,11 +150,11 @@ export default async function HomePage() {
       </section>
 
       {/* Featured Products */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
-        <div className="flex items-end justify-between mb-10">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
+        <div className="flex items-end justify-between mb-8 sm:mb-10">
           <div>
             <p className="text-[10px] tracking-[0.2em] uppercase text-aura-stone font-light mb-2">Hand-picked</p>
-            <h2 className="font-display text-4xl font-light text-aura-charcoal">Featured Products</h2>
+            <h2 className="font-display text-2xl sm:text-4xl font-light text-aura-charcoal">Featured Products</h2>
           </div>
           <Link
             href="/bestsellers"
@@ -167,12 +167,12 @@ export default async function HomePage() {
       </section>
 
       {/* Bestsellers */}
-      <section className="py-20" style={{ background: 'linear-gradient(180deg, #FCEEF5 0%, #FDF8FB 100%)' }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex items-end justify-between mb-10">
+      <section className="py-10 sm:py-20" style={{ background: 'linear-gradient(180deg, #FCEEF5 0%, #FDF8FB 100%)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+          <div className="flex items-end justify-between mb-8 sm:mb-10">
             <div>
               <p className="text-[10px] tracking-[0.2em] uppercase text-aura-stone font-light mb-2">Most Loved</p>
-              <h2 className="font-display text-4xl font-light text-aura-charcoal">Our Bestsellers</h2>
+              <h2 className="font-display text-2xl sm:text-4xl font-light text-aura-charcoal">Our Bestsellers</h2>
             </div>
             <Link
               href="/bestsellers"
@@ -186,7 +186,7 @@ export default async function HomePage() {
       </section>
 
       {/* Skin Quiz CTA */}
-      <section className="w-full py-24 px-6 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #C44B8A 0%, #9B2D6E 50%, #C44B8A 100%)' }}>
+      <section className="w-full py-14 sm:py-24 px-4 sm:px-6 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #C44B8A 0%, #9B2D6E 50%, #C44B8A 100%)' }}>
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true"
           style={{ background: 'radial-gradient(circle at 20% 50%, rgba(255,255,255,0.08) 0%, transparent 50%)' }} />
         <div className="max-w-2xl mx-auto text-center relative z-10">

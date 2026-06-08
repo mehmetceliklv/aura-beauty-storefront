@@ -13,7 +13,7 @@ export default function PromoBanner() {
       className="w-full relative overflow-hidden"
       style={{ background: 'linear-gradient(160deg, #FDF8FB 0%, #FCEEF5 60%, #F4C5DC 100%)' }}
     >
-      <div className="max-w-7xl mx-auto px-6 py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
           {/* Left: text */}

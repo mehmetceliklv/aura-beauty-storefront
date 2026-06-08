@@ -118,7 +118,7 @@ export default function Header({ cartCount: cartCountProp = 0 }: HeaderProps) {
             </button>
 
             {searchOpen && (
-              <div className="absolute right-0 top-full mt-3 z-50" style={{ width: '300px' }}>
+              <div className="absolute right-0 top-full mt-3 z-50 w-[calc(100vw-3rem)] sm:w-80">
                 <form
                   onSubmit={(e) => {
                     e.preventDefault()

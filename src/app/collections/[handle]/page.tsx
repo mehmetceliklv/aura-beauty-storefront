@@ -63,9 +63,9 @@ export default async function CollectionPage({ params, searchParams }: Props) {
   const displayTitle = collection?.title ?? handle.replace(/-/g, ' ')
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-16">
-      <div className="mb-12">
-        <h1 className="font-display text-5xl font-light text-aura-charcoal tracking-wide capitalize mb-2">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-16">
+      <div className="mb-8 sm:mb-12">
+        <h1 className="font-display text-3xl sm:text-5xl font-light text-aura-charcoal tracking-wide capitalize mb-2">
           {displayTitle}
         </h1>
         {collection?.description && (

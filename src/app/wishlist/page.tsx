@@ -30,7 +30,7 @@ export default function WishlistPage() {
     <div>
       {/* Hero */}
       <div className="bg-aura-blush border-b border-aura-border-soft">
-        <div className="max-w-5xl mx-auto px-6 py-12">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
           <nav className="mb-6 text-[11px] tracking-[0.1em] uppercase text-aura-stone">
             <Link
               href="/account"
@@ -44,7 +44,7 @@ export default function WishlistPage() {
           <div className="flex items-center gap-4">
             <span className="text-aura-rose-gold text-3xl">♡</span>
             <div>
-              <h1 className="font-display text-4xl font-light text-aura-charcoal">
+              <h1 className="font-display text-2xl sm:text-4xl font-light text-aura-charcoal">
                 My Wishlist
               </h1>
               <p className="text-[13px] text-aura-stone mt-1">
